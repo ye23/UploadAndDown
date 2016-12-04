@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="闹钟：" />
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	    
+        <Button
+	        android:id="@+id/chongfuzhouqi"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:text="重复周期"
+	        android:layout_weight="2" 
+	        />
+        	    
+	    <EditText
+	        android:id="@+id/inputDate"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:focusable="false"
+	        android:inputType="none" 
+	        android:layout_weight="2" 
+	        />
+	    
+	    <Button
+	        android:id="@+id/gengduoshezhi"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:text="更多设置"
+	        android:layout_weight="2" 
+	        />
+	    
+	   <Button
+	        android:id="@+id/off"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:text="OFF"
+	        android:layout_weight="1" 
+	        />
+    
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="结束时间" />
+
+    <EditText
+        android:id="@+id/inputDate2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:inputType="none" />
+
+</LinearLayout>

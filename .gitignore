@@ -1,0 +1,7 @@
+bin/
+gen/
+target/
+!assets
+!libs
+!res
+!assets/bin
