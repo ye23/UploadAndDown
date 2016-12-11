@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.DatePicker.OnDateChangedListener;
@@ -29,11 +31,12 @@ import android.widget.TimePicker.OnTimeChangedListener;
  * 
  * @author
  */
-public class DateTimePickDialogUtil implements OnDateChangedListener,
+
+public class DateTimePickDialogUtil extends Activity implements OnDateChangedListener,
 		OnTimeChangedListener {
 	private DatePicker datePicker;
 	private TimePicker timePicker;
-	private AlertDialog ad,cd;
+	private AlertDialog ad;
 	private String dateTime;
 	private String initDateTime;
 	private Activity activity;
@@ -71,12 +74,7 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 		timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
 	}
 
-	/**
-	 * 弹出时间选择框方法
-	 * 
-	 * @param inputDate:为需要设置的日期时间文本编辑框
-	 * @return
-	 */
+	/** 时间选择框*/
 	public AlertDialog dateTimePicKDialog(final EditText inputDate) {
 		LinearLayout dateTimeLayout = (LinearLayout) activity
 				.getLayoutInflater().inflate(R.layout.common_datetime, null);
@@ -95,11 +93,12 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 						String SFTime=dateTime.substring(11,dateTime.length());
 						inputDate.setText(SFTime);
 						Log.e("test", dateTime.indexOf("日")+"+"+dateTime.length()+"+"+SFTime);
+						DateTimePickerActivity.SCbaocun.putString("time", SFTime);
+						DateTimePickerActivity.SCbaocun.commit(); 
 					}
 				})
 				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						inputDate.setText("");
 					}
 				}).show();
 
@@ -107,15 +106,10 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 		return ad;
 	}
 	
-	/**
-	 * 弹出日期选择框方法
-	 * 
-	 * @param inputDate:为需要设置的日期时间文本编辑框
-	 * @return
-	 */
+	/**日期选择框*/
 	public AlertDialog datePicKDialog(final Button inputDate) {
 		LinearLayout dateTimeLayout = (LinearLayout) activity
-				.getLayoutInflater().inflate(R.layout.common_datetime, null);
+				.getLayoutInflater().inflate(R.layout.common_date, null);
 		datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
 		timePicker = (TimePicker) dateTimeLayout.findViewById(R.id.timepicker);
 		init(datePicker, timePicker);
@@ -128,18 +122,251 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 				.setPositiveButton("设置", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						
-						String SFTime=dateTime.substring(11,dateTime.length());
+						String SFTime=dateTime.substring(0,11);
 						inputDate.setText(SFTime);
 						Log.e("test", dateTime.indexOf("日")+"+"+dateTime.length()+"+"+SFTime);
+						DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "SFTime");
+						DateTimePickerActivity.SCbaocun.commit();
 					}
 				})
 				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
-						inputDate.setText("");
 					}
 				}).show();
 
 		onDateChanged(null, 0, 0, 0);
+		return ad;
+	}
+	
+	/**周期选择框*/
+	public AlertDialog zhouqiDialog(final Button inputDate) {
+		LinearLayout dateTimeLayout = (LinearLayout) activity
+				.getLayoutInflater().inflate(R.layout.common_zhouqi, null);
+				
+		ad = new AlertDialog.Builder(activity)
+				.setTitle("请选择重复的周期")
+				.setView(dateTimeLayout)
+				.show();
+		
+		Button meitian,meizhou,meiyue,ziding,teding;
+		meitian = (Button) dateTimeLayout.findViewById(R.id.meitian);
+		meizhou = (Button) dateTimeLayout.findViewById(R.id.meizhou);
+		meiyue = (Button) dateTimeLayout.findViewById(R.id.meiyue);
+		ziding = (Button) dateTimeLayout.findViewById(R.id.ziding);
+		teding = (Button) dateTimeLayout.findViewById(R.id.teding);
+		
+		meitian.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				inputDate.setText("每天");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "每天");
+				DateTimePickerActivity.SCbaocun.commit(); 
+				ad.dismiss();
+			}
+		});
+		meizhou.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				inputDate.setText("每周");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "每周");
+				DateTimePickerActivity.SCbaocun.commit(); 
+				ad.dismiss();	
+			}
+		});
+		meiyue.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				inputDate.setText("每月");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "每月");
+				DateTimePickerActivity.SCbaocun.commit(); 
+				ad.dismiss();
+			}
+		});
+		ziding.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				inputDate.setText("自定");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "自定");
+				DateTimePickerActivity.SCbaocun.commit(); 
+				ad.dismiss();
+			}
+		});
+		teding.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				ad.dismiss();
+				datePicKDialog(inputDate);
+			}
+		});
+		
+		return ad;
+	}
+	
+	/**响铃方式选择框*/
+	public AlertDialog xianglingfangshi(final Button inputDate) {
+        final String[] xuanxiang = new String[] { "录音", "铃声", "闪烁屏幕","铃声+闪烁屏幕","铃声(强行把音量开到最大)","铃声(最大音量)+闪烁屏幕(疯狂)"};   
+        ad = new AlertDialog.Builder(activity) 
+                .setTitle("响铃方式：")
+                .setItems(xuanxiang, new DialogInterface.OnClickListener() { 
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+	            		switch (which) {
+	            			case 0: 
+	            				inputDate.setText("响铃方式：录音");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "录音");
+	            				DateTimePickerActivity.SCbaocun.commit();  
+	            				break;
+	            			case 1: 
+	            				inputDate.setText("响铃方式：铃声");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "铃声");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 2: 
+	            				inputDate.setText("响铃方式：闪屏");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "闪屏");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 3: 
+	            				inputDate.setText("响铃方式：铃声+闪屏");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "铃声和闪屏");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 4: 
+	            				inputDate.setText("响铃方式：最大音量铃声");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "最大音量铃声");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 5: 
+	            				inputDate.setText("响铃方式：大铃声，疯闪屏");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "大铃声和疯闪屏");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			default:
+	            				break;
+	            		}
+                    } 
+                }). show(); 
+		return ad;
+	}
+	
+	/**铃声选择框*/
+	public AlertDialog lingsheng(final Button inputDate) {
+        final String[] xuanxiang = new String[] { "录音1","录音2", "铃声1","铃声2", "特殊" };   
+        ad = new AlertDialog.Builder(activity) 
+                .setTitle("铃声：")
+                .setItems(xuanxiang, new DialogInterface.OnClickListener() { 
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+	            		switch (which) {
+	            			case 0: 
+	            				inputDate.setText("铃声：录音1");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "录音1");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 1: 
+	            				inputDate.setText("铃声：录音2");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "录音2");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 2: 
+	            				inputDate.setText("铃声：铃声1");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "铃声1");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 3: 
+	            				inputDate.setText("铃声：铃声2");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "铃声2");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 4: 
+	            				inputDate.setText("铃声：特殊");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "特殊");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			default:
+	            				break;
+	            		}
+                    } 
+                }). show(); 
+		return ad;
+	}
+	
+	/**响铃间隔选择框*/
+	public AlertDialog jiange(final Button inputDate) {
+        final String[] xuanxiang = new String[] { "关闭（只响一次）","间隔1分钟", "间隔3分钟","间隔5分钟", "无间隔一直响一直响" };   
+        ad = new AlertDialog.Builder(activity) 
+                .setTitle("响铃间隔：")
+                .setItems(xuanxiang, new DialogInterface.OnClickListener() { 
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+	            		switch (which) {
+	            			case 0: 
+	            				inputDate.setText("响铃间隔：关闭（只响一次）");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "关闭（只响一次）");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 1: 
+	            				inputDate.setText("响铃间隔：间隔1分钟");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "间隔1分钟");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 2: 
+	            				inputDate.setText("响铃间隔：间隔3分钟");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "间隔3分钟");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 3: 
+	            				inputDate.setText("响铃间隔：间隔5分钟");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "间隔5分钟");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 4: 
+	            				inputDate.setText("响铃间隔：无间隔一直响一直响");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "无间隔一直响一直响");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			default:
+	            				break;
+	            		}
+                    } 
+                }). show(); 
+		return ad;
+	}
+	
+	/**关闭方式选择框*/
+	public AlertDialog guanbifanghsi(final Button inputDate) {
+        final String[] xuanxiang = new String[] { "点击屏幕按键关闭闹钟","摇晃手机3下关闭闹钟", "疯狂摇晃手机30下后关闭闹钟","做题，答对后关闭闹钟", "设置题目（用于上面的答题）" };   
+        ad = new AlertDialog.Builder(activity) 
+                .setTitle("响铃间隔：")
+                .setItems(xuanxiang, new DialogInterface.OnClickListener() { 
+                    @Override 
+                    public void onClick(DialogInterface dialog, int which) { 
+	            		switch (which) {
+	            			case 0: 
+	            				inputDate.setText("关闭方式：点击屏幕");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "点击屏幕");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 1: 
+	            				inputDate.setText("关闭方式：摇晃手机");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "摇晃手机");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 2: 
+	            				inputDate.setText("关闭方式：疯狂摇晃");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "疯狂摇晃");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 3: 
+	            				inputDate.setText("关闭方式：回答问题");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "回答问题1");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			case 4: 
+	            				inputDate.setText("关闭方式：回答问题");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "回答问题2");
+	            				DateTimePickerActivity.SCbaocun.commit();
+	            				break;
+	            			default:
+	            				break;
+	            		}
+                    } 
+                }). show(); 
 		return ad;
 	}
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    
+    <Button
+		 android:id="@+id/fangshi"
+		 android:layout_width="fill_parent" 
+		 android:layout_height="wrap_content"
+		 android:text="响铃方式"
+	 />
+    
+    <Button
+		 android:id="@+id/xiangling"
+		 android:layout_width="fill_parent" 
+		 android:layout_height="wrap_content"
+		 android:text="铃声"
+	 />
+    
+     <Button
+		 android:id="@+id/chongfucishu"
+		 android:layout_width="fill_parent" 
+		 android:layout_height="wrap_content"
+		 android:text="稍后再响间隔"
+	 />
+     
+     <Button
+		 android:id="@+id/guanbifangshi"
+		 android:layout_width="fill_parent" 
+		 android:layout_height="wrap_content"
+		 android:text="关闭闹铃方式"
+	 />
+     
+<!--      <Button
+		 android:id="@+id/queding"
+		 android:layout_width="fill_parent" 
+		 android:layout_height="wrap_content"
+		 android:text="保存设置"
+	 /> -->
+
+
+</LinearLayout>
