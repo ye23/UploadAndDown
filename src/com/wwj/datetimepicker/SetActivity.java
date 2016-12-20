@@ -15,17 +15,22 @@ public class SetActivity extends Activity {
 	
 	private Button xianglingfangshi,xiangling,chongfucishu,guanbifangshi,queding;
 	
+	private int ii;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set);
+		
+        Bundle bundle = this.getIntent().getExtras();
+        ii = bundle.getInt("num");
 		
 		xianglingfangshi = (Button) findViewById(R.id.fangshi);//响铃方式 
 		xianglingfangshi.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
 						SetActivity.this, initEndDateTime);
-				dateTimePicKDialog.xianglingfangshi(xianglingfangshi);
+				dateTimePicKDialog.xianglingfangshi(xianglingfangshi,ii);
 			}
 		});
 		
@@ -34,7 +39,7 @@ public class SetActivity extends Activity {
 			public void onClick(View v) {
 				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
 						SetActivity.this, initEndDateTime);
-				dateTimePicKDialog.lingsheng(xiangling);
+				dateTimePicKDialog.lingsheng(xiangling,ii);
 			}
 		});
 		
@@ -43,7 +48,7 @@ public class SetActivity extends Activity {
 			public void onClick(View v) {
 				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
 						SetActivity.this, initEndDateTime);
-				dateTimePicKDialog.jiange(chongfucishu);
+				dateTimePicKDialog.jiange(chongfucishu,ii);
 			}
 		});
 		
@@ -52,9 +57,29 @@ public class SetActivity extends Activity {
 			public void onClick(View v) {
 				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
 						SetActivity.this, initEndDateTime);
-				dateTimePicKDialog.guanbifanghsi(guanbifangshi);
+				dateTimePicKDialog.guanbifanghsi(guanbifangshi,ii);
 			}
 		});
+		
+		if(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_xianglingfangshi"+ii, "0").equals("0")){
+		}else{
+			xianglingfangshi.setText(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_xianglingfangshi"+ii, "0"));
+		}
+		
+		if(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_lingsheng"+ii, "0").equals("0")){
+		}else{
+			xiangling.setText(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_lingsheng"+ii, "0"));
+		}
+		
+		if(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_jiange"+ii, "0").equals("0")){
+		}else{
+			chongfucishu.setText(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_jiange"+ii, "0"));
+		}
+		
+		if(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_guanbifangshi"+ii, "0").equals("0")){
+		}else{
+			guanbifangshi.setText(DateTimePickerActivity.SharedClock.getString("gengduoshezhi_guanbifangshi"+ii, "0"));
+		}
 		
 /*		queding = (Button) findViewById(R.id.queding);//确定
 		queding.setOnClickListener(new OnClickListener() {

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="闹钟：" />
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        <Button
+	        android:id="@+id/chongfuzhouqi1"
+			style="@style/Btton_chongfuzhouqi"
+	        />	    
+	    <EditText
+	        android:id="@+id/inputDate1"
+			style="@style/Btton_time" 
+	        />
+	    <Button
+	        android:id="@+id/gengduoshezhi1"
+			style="@style/Btton_gengduoshezhi" 
+	        />
+	   <Button
+	        android:id="@+id/off1"
+			style="@style/Btton_kaiguan" 
+	        />
+    </LinearLayout>
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        <Button
+	        android:id="@+id/chongfuzhouqi2"
+			style="@style/Btton_chongfuzhouqi"
+	        />	    
+	    <EditText
+	        android:id="@+id/inputDate2"
+			style="@style/Btton_time" 
+	        />
+	    <Button
+	        android:id="@+id/gengduoshezhi2"
+			style="@style/Btton_gengduoshezhi" 
+	        />
+	   <Button
+	        android:id="@+id/off2"
+			style="@style/Btton_kaiguan" 
+	        />
+    </LinearLayout>
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        <Button
+	        android:id="@+id/chongfuzhouqi3"
+			style="@style/Btton_chongfuzhouqi"
+	        />	    
+	    <EditText
+	        android:id="@+id/inputDate3"
+			style="@style/Btton_time" 
+	        />
+	    <Button
+	        android:id="@+id/gengduoshezhi3"
+			style="@style/Btton_gengduoshezhi" 
+	        />
+	   <Button
+	        android:id="@+id/off3"
+			style="@style/Btton_kaiguan" 
+	        />
+    </LinearLayout>
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        <Button
+	        android:id="@+id/chongfuzhouqi4"
+			style="@style/Btton_chongfuzhouqi"
+	        />	    
+	    <EditText
+	        android:id="@+id/inputDate4"
+			style="@style/Btton_time" 
+	        />
+	    <Button
+	        android:id="@+id/gengduoshezhi4"
+			style="@style/Btton_gengduoshezhi" 
+	        />
+	   <Button
+	        android:id="@+id/off4"
+			style="@style/Btton_kaiguan" 
+	        />
+    </LinearLayout>
+    
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        <Button
+	        android:id="@+id/chongfuzhouqi5"
+			style="@style/Btton_chongfuzhouqi"
+	        />	    
+	    <EditText
+	        android:id="@+id/inputDate5"
+			style="@style/Btton_time" 
+	        />
+	    <Button
+	        android:id="@+id/gengduoshezhi5"
+			style="@style/Btton_gengduoshezhi" 
+	        />
+	   <Button
+	        android:id="@+id/off5"
+			style="@style/Btton_kaiguan" 
+	        />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.wwj.datetimepicker;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -75,7 +76,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 
 	/** 时间选择框*/
-	public AlertDialog dateTimePicKDialog(final EditText inputDate) {
+	public AlertDialog dateTimePicKDialog(final EditText inputDate,final int num) {
 		LinearLayout dateTimeLayout = (LinearLayout) activity
 				.getLayoutInflater().inflate(R.layout.common_datetime, null);
 		datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
@@ -93,7 +94,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 						String SFTime=dateTime.substring(11,dateTime.length());
 						inputDate.setText(SFTime);
 						Log.e("test", dateTime.indexOf("日")+"+"+dateTime.length()+"+"+SFTime);
-						DateTimePickerActivity.SCbaocun.putString("time", SFTime);
+						DateTimePickerActivity.SCbaocun.putString("time"+num, SFTime);
 						DateTimePickerActivity.SCbaocun.commit(); 
 					}
 				})
@@ -107,7 +108,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 	
 	/**日期选择框*/
-	public AlertDialog datePicKDialog(final Button inputDate) {
+	public AlertDialog datePicKDialog(final Button inputDate,final int num) {
 		LinearLayout dateTimeLayout = (LinearLayout) activity
 				.getLayoutInflater().inflate(R.layout.common_date, null);
 		datePicker = (DatePicker) dateTimeLayout.findViewById(R.id.datepicker);
@@ -125,7 +126,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 						String SFTime=dateTime.substring(0,11);
 						inputDate.setText(SFTime);
 						Log.e("test", dateTime.indexOf("日")+"+"+dateTime.length()+"+"+SFTime);
-						DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "SFTime");
+						DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi"+num, SFTime);
 						DateTimePickerActivity.SCbaocun.commit();
 					}
 				})
@@ -139,7 +140,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 	
 	/**周期选择框*/
-	public AlertDialog zhouqiDialog(final Button inputDate) {
+	public AlertDialog zhouqiDialog(final Button inputDate,final int num) {
 		LinearLayout dateTimeLayout = (LinearLayout) activity
 				.getLayoutInflater().inflate(R.layout.common_zhouqi, null);
 				
@@ -158,7 +159,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 		meitian.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				inputDate.setText("每天");
-				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "每天");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi"+num, "每天");
 				DateTimePickerActivity.SCbaocun.commit(); 
 				ad.dismiss();
 			}
@@ -166,7 +167,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 		meizhou.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				inputDate.setText("每周");
-				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "每周");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi"+num, "每周");
 				DateTimePickerActivity.SCbaocun.commit(); 
 				ad.dismiss();	
 			}
@@ -174,7 +175,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 		meiyue.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				inputDate.setText("每月");
-				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "每月");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi"+num, "每月");
 				DateTimePickerActivity.SCbaocun.commit(); 
 				ad.dismiss();
 			}
@@ -182,7 +183,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 		ziding.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				inputDate.setText("自定");
-				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi", "自定");
+				DateTimePickerActivity.SCbaocun.putString("chongfuzhouqi"+num, "自定");
 				DateTimePickerActivity.SCbaocun.commit(); 
 				ad.dismiss();
 			}
@@ -190,7 +191,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 		teding.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 				ad.dismiss();
-				datePicKDialog(inputDate);
+				datePicKDialog(inputDate,num);
 			}
 		});
 		
@@ -198,7 +199,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 	
 	/**响铃方式选择框*/
-	public AlertDialog xianglingfangshi(final Button inputDate) {
+	public AlertDialog xianglingfangshi(final Button inputDate,final int num) {
         final String[] xuanxiang = new String[] { "录音", "铃声", "闪烁屏幕","铃声+闪烁屏幕","铃声(强行把音量开到最大)","铃声(最大音量)+闪烁屏幕(疯狂)"};   
         ad = new AlertDialog.Builder(activity) 
                 .setTitle("响铃方式：")
@@ -208,32 +209,32 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	            		switch (which) {
 	            			case 0: 
 	            				inputDate.setText("响铃方式：录音");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "录音");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi"+num, "响铃方式：录音");
 	            				DateTimePickerActivity.SCbaocun.commit();  
 	            				break;
 	            			case 1: 
 	            				inputDate.setText("响铃方式：铃声");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "铃声");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi"+num, "响铃方式：铃声");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 2: 
 	            				inputDate.setText("响铃方式：闪屏");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "闪屏");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi"+num, "响铃方式：闪屏");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 3: 
 	            				inputDate.setText("响铃方式：铃声+闪屏");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "铃声和闪屏");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi"+num, "响铃方式：铃声+闪屏");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 4: 
 	            				inputDate.setText("响铃方式：最大音量铃声");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "最大音量铃声");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi"+num, "最大音量铃声");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 5: 
 	            				inputDate.setText("响铃方式：大铃声，疯闪屏");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi", "大铃声和疯闪屏");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_xianglingfangshi"+num, "大铃声和疯闪屏");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			default:
@@ -245,7 +246,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 	
 	/**铃声选择框*/
-	public AlertDialog lingsheng(final Button inputDate) {
+	public AlertDialog lingsheng(final Button inputDate,final int num) {
         final String[] xuanxiang = new String[] { "录音1","录音2", "铃声1","铃声2", "特殊" };   
         ad = new AlertDialog.Builder(activity) 
                 .setTitle("铃声：")
@@ -255,27 +256,27 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	            		switch (which) {
 	            			case 0: 
 	            				inputDate.setText("铃声：录音1");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "录音1");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng"+num, "铃声：录音1");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 1: 
 	            				inputDate.setText("铃声：录音2");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "录音2");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng"+num, "铃声：录音2");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 2: 
 	            				inputDate.setText("铃声：铃声1");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "铃声1");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng"+num, "铃声：铃声1");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 3: 
 	            				inputDate.setText("铃声：铃声2");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "铃声2");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng"+num, "铃声：铃声2");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 4: 
 	            				inputDate.setText("铃声：特殊");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng", "特殊");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_lingsheng"+num, "铃声：特殊");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			default:
@@ -287,7 +288,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 	
 	/**响铃间隔选择框*/
-	public AlertDialog jiange(final Button inputDate) {
+	public AlertDialog jiange(final Button inputDate,final int num) {
         final String[] xuanxiang = new String[] { "关闭（只响一次）","间隔1分钟", "间隔3分钟","间隔5分钟", "无间隔一直响一直响" };   
         ad = new AlertDialog.Builder(activity) 
                 .setTitle("响铃间隔：")
@@ -297,27 +298,27 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	            		switch (which) {
 	            			case 0: 
 	            				inputDate.setText("响铃间隔：关闭（只响一次）");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "关闭（只响一次）");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange"+num, "响铃间隔：关闭（只响一次）");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 1: 
 	            				inputDate.setText("响铃间隔：间隔1分钟");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "间隔1分钟");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange"+num, "响铃间隔：间隔1分钟");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 2: 
 	            				inputDate.setText("响铃间隔：间隔3分钟");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "间隔3分钟");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange"+num, "响铃间隔：间隔3分钟");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 3: 
 	            				inputDate.setText("响铃间隔：间隔5分钟");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "间隔5分钟");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange"+num, "响铃间隔：间隔5分钟");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 4: 
 	            				inputDate.setText("响铃间隔：无间隔一直响一直响");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange", "无间隔一直响一直响");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_jiange"+num, "响铃间隔：无间隔一直响一直响");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			default:
@@ -329,7 +330,7 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	}
 	
 	/**关闭方式选择框*/
-	public AlertDialog guanbifanghsi(final Button inputDate) {
+	public AlertDialog guanbifanghsi(final Button inputDate,final int num) {
         final String[] xuanxiang = new String[] { "点击屏幕按键关闭闹钟","摇晃手机3下关闭闹钟", "疯狂摇晃手机30下后关闭闹钟","做题，答对后关闭闹钟", "设置题目（用于上面的答题）" };   
         ad = new AlertDialog.Builder(activity) 
                 .setTitle("响铃间隔：")
@@ -339,27 +340,27 @@ public class DateTimePickDialogUtil extends Activity implements OnDateChangedLis
 	            		switch (which) {
 	            			case 0: 
 	            				inputDate.setText("关闭方式：点击屏幕");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "点击屏幕");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi"+num, "关闭方式：点击屏幕");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 1: 
 	            				inputDate.setText("关闭方式：摇晃手机");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "摇晃手机");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi"+num, "关闭方式：摇晃手机");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 2: 
 	            				inputDate.setText("关闭方式：疯狂摇晃");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "疯狂摇晃");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi"+num, "关闭方式：疯狂摇晃");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 3: 
 	            				inputDate.setText("关闭方式：回答问题");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "回答问题1");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi"+num, "关闭方式：回答问题1");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			case 4: 
 	            				inputDate.setText("关闭方式：回答问题");
-	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi", "回答问题2");
+	            				DateTimePickerActivity.SCbaocun.putString("gengduoshezhi_guanbifangshi"+num, "关闭方式：回答问题2");
 	            				DateTimePickerActivity.SCbaocun.commit();
 	            				break;
 	            			default:
