@@ -8,28 +8,28 @@
 		 android:id="@+id/fangshi"
 		 android:layout_width="fill_parent" 
 		 android:layout_height="wrap_content"
-		 android:text="响铃方式"
+		 android:text="1"
 	 />
     
     <Button
 		 android:id="@+id/xiangling"
 		 android:layout_width="fill_parent" 
 		 android:layout_height="wrap_content"
-		 android:text="铃声"
+		 android:text="2"
 	 />
     
      <Button
 		 android:id="@+id/chongfucishu"
 		 android:layout_width="fill_parent" 
 		 android:layout_height="wrap_content"
-		 android:text="稍后再响间隔"
+		 android:text="3"
 	 />
      
      <Button
 		 android:id="@+id/guanbifangshi"
 		 android:layout_width="fill_parent" 
 		 android:layout_height="wrap_content"
-		 android:text="关闭闹铃方式"
+		 android:text="4"
 	 />
      
 <!--      <Button
